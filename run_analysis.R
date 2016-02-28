@@ -18,7 +18,7 @@
 library(dplyr)
 
 # Check for data and download/unzip if necessary
-zipfilename <- "Project4Data.zip"
+zipfilename <- "ProjectData.zip"
 unzipdirectory <- "UCI HAR Dataset"
 
 if(!file.exists(zipfilename)){
@@ -75,7 +75,7 @@ combineall <- bind_cols(combine_subjects, activies, dataMeanStd)
 ###        set with the average of each variable for each activity and each 
 ###        subject.
 meansummary <- combineall %>% arrange(subject, activity) %>% group_by(subject, activity) %>% summarize_each(funs(mean))
-summaryLabels <- c("Subject", "Activity", paste("Mean", dataLabels))
+summaryLabels <- c("Subject", "Activity", paste("Mean", dataLabels, sep = "_"))
 names(meansummary) <- summaryLabels
 
 # Write final tidy summary to a text file for submission
